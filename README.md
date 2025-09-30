@@ -68,13 +68,15 @@ GPU: the hardware has a Mali GPU, but the stock OS uses it via DirectFB QT libra
 
 ## Boot Modes
 
-After installation, you will have 3 different boot options, depending on what buttons are held:
+After installation, you will have 3 different boot options, depending on what buttons are held when you plug it in:
 
-| Mode   | Details                                                                                                             | Logo                                                                                                    |
-| ------ | ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
-| Debian | \* bootlogo is blue Home Assistant icon<br> \* kernel is `boot_a` root is `data`                                    | <a href="./files/logo/upgrade_success.bmp"><img src="./files/logo/upgrade_success.bmp" height=200 ></a> |
-| Debian | \* bootlogo says Utility Mode<br> \* kernel is `boot_a` root is `system_a`<br> \* adb and usbnet already configured | <a href="./files/logo/bootup_spotify.bmp"><img src="./files/logo/bootup_spotify.bmp" height=200></a>    |
-| Debian | \* bootlogo says USB Burn Mode <br> \* ready to flash images                                                        | <a href="./files/logo/upgrade_error.bmp"><img src="./files/logo/upgrade_error.bmp" height=200></a>      |
+| Buttons    | Mode          | Details                                                                                                             | Logo                                                                                                    |
+| ---------- | ------------- | ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
+| none       | Debian        | \* bootlogo is blue Home Assistant icon<br> \* kernel is `boot_a` root is `data`                                    | <a href="./files/logo/upgrade_success.bmp"><img src="./files/logo/upgrade_success.bmp" height=200 ></a> |
+| hold 1     | Utility Mode  | \* bootlogo says Utility Mode<br> \* kernel is `boot_a` root is `system_a`<br> \* adb and usbnet already configured | <a href="./files/logo/bootup_spotify.bmp"><img src="./files/logo/bootup_spotify.bmp" height=200></a>    |
+| hold 4     | USB Burn Mode | \* bootlogo says USB Burn Mode <br> \* ready to flash images                                                        | <a href="./files/logo/upgrade_error.bmp"><img src="./files/logo/upgrade_error.bmp" height=200></a>      |
+| hold 1 & 4 | USB Mode      | \* screen is black <br> \* can enter USB Burn Mode using: <br>`./superbird-toolpy --burn_mode`                      | <img src="./logos_sources/black.bmp" height=200>                                                        |
+|            |
 
 ## Installation
 
