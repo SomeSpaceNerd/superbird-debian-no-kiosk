@@ -1,3 +1,11 @@
 # python packages to be installed (as root) using pip, on superbird
-# Home Assistant API, for controlling lighting and recalling scenes
+
+websockets
+coloredlogs
+aiohttp
+hassapi
 homeassistant_api
+yattag
+websockify
+psutil
+packaging

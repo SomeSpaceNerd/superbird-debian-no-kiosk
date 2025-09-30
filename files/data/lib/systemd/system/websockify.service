@@ -1,0 +1,10 @@
+[Unit]
+Description=Websockify server for accessing VNC via websocket
+Wants=network-online.target
+
+[Service]
+ExecStart=/scripts/setup_websockify.sh
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

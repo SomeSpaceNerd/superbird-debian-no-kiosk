@@ -1,0 +1,20 @@
+[MAIN]
+
+disable=
+    line-too-long,
+    too-many-branches,
+    too-many-statements,
+    too-many-lines,
+    too-many-public-methods,
+    too-many-nested-blocks,
+    wildcard-import,
+    broad-except,
+    missing-function-docstring,
+    invalid-name,
+    missing-module-docstring,
+    missing-class-docstring,
+    consider-using-f-string,
+    logging-fstring-interpolation,
+    global-variable-not-assigned,
+    global-statement,
+    too-many-instance-attributes

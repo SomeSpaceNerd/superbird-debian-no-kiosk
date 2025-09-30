@@ -16,3 +16,9 @@ rootfs.tar.gz
 modules/
 dist/
 headers/
+venv/
+
+__pycache__
+**/__pycache__
+.mypy_cache
+**/.mypy_cache

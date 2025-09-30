@@ -1,0 +1,2 @@
+# Amlogic S905 series can be booted up in Maskrom Mode, and it needs a rule to show up correctly
+SUBSYSTEM=="usb", ENV{DEVTYPE}=="usb_device", ATTR{idVendor}=="1b8e", ATTR{idProduct}=="c003", MODE:="0666", SYMLINK+="worldcup"

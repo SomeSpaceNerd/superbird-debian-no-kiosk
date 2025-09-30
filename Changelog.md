@@ -1,5 +1,23 @@
 # Change Log
 
+v2.0
+
+With this release you MUST re-setup host device and re-flash superbird.
+We now have an updater; you will not need to do this again!
+
+- added webui for configuration, viewing device screen, browser devtools, simulating button presses, and viewing logs
+  - port is forwarded thru host device, access it on port `80`
+- added "Host Maintenance Center" webui
+  - access on port `9090`
+- combined `browser` and `buttons` services into a single `kiosk` service
+- all config is now consolidated to `/etc/kiosk/config.json` on superbird device
+- rewrote all build, update, and install scripts for better approach
+- added `update.sh` to update everything automatically (for future releases)
+- moved `/scripts/vnc_passwd` -> `/etc/vnc/vnc_passwd`
+  - and you can change vnc password in the webui
+- added haproxy to proxy chromium devtools for access outside of localhost
+  - access via main webui, or via port `9223`
+
 v1.9
 
 With this release you MUST re-setup host device and re-flash superbird.

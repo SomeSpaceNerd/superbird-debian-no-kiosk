@@ -1,0 +1,203 @@
+body {
+  background-color: #606060;
+  color: black;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.float-container {
+  padding: 0px;
+}
+.float-child[id="body_navbar"] {
+  top: 0px;
+  padding: 0;
+  width: 220px;
+  float: left;
+}
+.float-child[id="body_content"] {
+  position: absolute;
+  top: 60px;
+  left: 240px;
+  right: 10px;
+  padding: 0;
+  float: left;
+  height: calc(100% - 50px);
+  overflow: scroll;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.log_content {
+  position: relative;
+  height: calc(100% - 80px);
+  width: 4294967295px;
+  overflow: scroll;
+  overflow-x: scroll;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+  white-space: pre-wrap;
+  background-color: #202020;
+  color: #ffffff;
+  font-family: "Courier New", monospace;
+  font-size: 14px;
+  border-radius: 10px;
+}
+
+.log_content::-webkit-scrollbar {
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  display: none;
+}
+
+/* Specific to config editor */
+input[type="text"][class="config_editor_input_field"] {
+  width: 100%;
+}
+input[type="url"][class="config_editor_input_field"] {
+  width: 100%;
+}
+input[type="number"][class="config_editor_input_field"] {
+  width: 60px;
+}
+input[type="range"][class="config_editor_input_field"] {
+  width: 100%;
+}
+
+input[type="submit"][class="config_editor_input_field"] {
+  width: 100px;
+  height: 30px;
+  border-radius: 8px;
+}
+
+.device_button {
+  width: 100px;
+  height: 30px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.maint_button {
+  width: 200px;
+  height: 30px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.nav_button {
+  width: 100%;
+  height: 30px;
+  border-radius: 10px;
+  border-color: #202020;
+  background-color: #808080;
+  color: white;
+  text-align: center;
+  padding-top: 10px;
+  cursor: pointer;
+}
+
+/* tabs */
+.tab_buttons_group {
+  padding-top: 10px;
+}
+.tab_button {
+  width: 150px;
+  height: 40px;
+  border-radius: 10px;
+  border-bottom-right-radius: 0px;
+  border-bottom-left-radius: 0px;
+  cursor: pointer;
+}
+.tab_button[tab_state="active"] {
+  color: black;
+  background-color: lightgray;
+  font-size: large;
+}
+.tab_button[tab_state="inactive"] {
+  color: black;
+  background-color: grey;
+  font-size: large;
+}
+
+.config_cat_description {
+  font-size: large;
+  /* text-decoration: underline; */
+  font-style: italic;
+}
+
+.config_editor_widget_group {
+  padding: 2px;
+}
+
+.config_editor_tab_content {
+  /* border: solid 2px darkslategray; */
+  background-color: lightgrey;
+  color: black;
+  padding: 10px;
+  border-radius: 10px;
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+  position: relative;
+  top: -4px;
+  margin: 2px;
+  box-shadow: 10px 10px 0px 0px darkslategray;
+}
+
+#version_label {
+  position: absolute;
+  left: 5px;
+  bottom: 5px;
+}
+
+/* Overlay */
+
+#page_overlay {
+  position: absolute;
+  display: none; /* Hidden by default */
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  margin: 0;
+  padding: 0;
+  opacity: 0.95;
+  border-radius: 50px;
+  background-color: #202020;
+}
+
+#page_overlay_container {
+  position: absolute;
+  left: 50px;
+  right: 50px;
+  top: 50px;
+  bottom: 50px;
+  margin: 50px;
+  padding: 50px;
+}
+
+#page_overlay_title {
+  color: #ffffff;
+  font-size: large;
+}
+
+#page_overlay_text {
+  color: #ffffff;
+  font-size: medium;
+}
+
+#browser_devtools {
+  position: relative;
+  height: calc(100vh - 150px);
+  width: calc(100vw - 280px);
+  overflow: scroll;
+  overflow-x: scroll;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+#browser_devtools_iframe {
+  position: relative;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  width: 99%;
+  height: 99%;
+}

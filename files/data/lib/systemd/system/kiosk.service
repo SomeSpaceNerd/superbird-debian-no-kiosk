@@ -1,0 +1,11 @@
+[Unit]
+Description=Kiosk Display
+Wants=network-online.target
+
+[Service]
+ExecStart=/usr/bin/python3 /scripts/kiosk.py
+ExecStartPre=/scripts/clear_systemd_logs.sh
+RestartSec=2
+
+[Install]
+WantedBy=multi-user.target
