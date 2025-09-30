@@ -1,6 +1,13 @@
 # Change Log
 
-v2.0
+v2.0.1
+
+- add `development` tag to images built using dev repo
+- show repo in Kiosk Host Maintenance Center
+
+No new images; Use v2.0.0 release, then click "Update to Latest" in Kiosk Host Maintenance Center (`http://devicename:9090/`)
+
+v2.0.0
 
 With this release you MUST re-setup host device and re-flash superbird.
 We now have an updater; you will not need to do this again!

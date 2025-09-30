@@ -528,6 +528,9 @@ class Webserver():
                 <br>
 
                 <div>
+                    <label>Repo: {REPO}</label>
+                </div>
+                <div>
                     <label>Installed: v{self.api.local_version}</label>
                     &nbsp
                     <label>Available: v{self.api.remote_version}</label>
@@ -541,13 +544,13 @@ class Webserver():
                     {buttons_content}
                 </div>
 
-                <h3 style="position:absolute; top: 230px;">Updater Service log:</h3>
-                <div id="service_log_content" style="{log_content_style} position:absolute; top: 280px; height: 300px;">
+                <h3 style="position:absolute; top: 250px;">Updater Service log:</h3>
+                <div id="service_log_content" style="{log_content_style} position:absolute; top: 300px; height: 300px;">
                     {self.get_logs(LOG_FILE)}
                 </div>
 
-                <h3 style="position:absolute; top: 580px;">Most recent update log:</h3>
-                <div id="upgrade_log_content" style="{log_content_style} position:absolute; top: 630px; bottom: 0px;">
+                <h3 style="position:absolute; top: 600px;">Most recent update log:</h3>
+                <div id="upgrade_log_content" style="{log_content_style} position:absolute; top: 650px; bottom: 0px;">
                     {self.get_logs(self.api.upgrade_log)}
                 </div>
             </body>

@@ -122,6 +122,8 @@ CSV_PACKAGES = ','.join(STAGE1_APT_PKGS)
 """comma-separated list of packages for debootstrap"""
 global_target_image: Path = None  # type:ignore
 """This is the folder containing the dump that we are currently working on"""
+global_image_tag: str = ''
+"""Tag to append to end of image name, used to mark development images"""
 
 # #### Utility
 
@@ -514,6 +516,8 @@ def build_release():
 
     for orient in ORIENTATIONS:
         ver_name = f'{filename_base}_{orient}_{timestamp}'
+        if global_image_tag != '':
+            ver_name += f'_{global_image_tag}'
         build_image(orient, ver_name)
 
 
@@ -534,6 +538,7 @@ def check_existing_dump():
 
 def check_dev():
     """Check if this is dev repo and print a warning"""
+    global global_image_tag
     output = run_bash("git remote -v|head -n 1|awk '{print $2}'")
     if 'git.bishopdynamics.com' in output:
         print()
@@ -541,6 +546,7 @@ def check_dev():
         log.warning(' DO NOT RELEASE THESE IMAGES! THEY WILL HAVE THE WRONG REPO INSTALLED!')
         log.warning(' ********* THIS IS THE DEV REPO!!! **********')
         print()
+        global_image_tag = 'development'
 
 
 if __name__ == '__main__':
