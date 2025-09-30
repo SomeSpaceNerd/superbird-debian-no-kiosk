@@ -178,10 +178,13 @@ ssh superbird@host-device
 
 ## How to build the images
 
-The release build script runs the image build script twice, once for each orientation, and using local proxy.
+The [images build script](./build_images.py) runs the image build process twice, once for each orientation, and will use `apt-cacher-ng` if it is installed.
+
+This script _must_ be run on arm64 Debian 12 (Bookworm)
+
+You _must_ provide a set of images dumped from a stock superbird device
 
 ```bash
+# looking for files in ./dumps/stock_dump/
 sudo ./build_images.py
 ```
-
-Hint: Install `apt-cacher-ng` to use cache packages (avoid re-downloading packages every time, much faster)
