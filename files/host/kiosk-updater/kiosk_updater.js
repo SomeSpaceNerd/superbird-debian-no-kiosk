@@ -22,6 +22,10 @@ function scroll_log_to_latest() {
     }, 10);
 }
 
+function set_device_name() {
+    let result_label = document.getElementById("page_title");
+    result_label.innerText = "Kiosk Host Maintenance Center: " + window.location.hostname;
+}
 
 function wait_for_update() {
     console.log("Will reload every " + reload_time + " seconds until update completes");

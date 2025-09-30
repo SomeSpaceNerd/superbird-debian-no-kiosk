@@ -27,15 +27,9 @@ from multidict import MultiDictProxy
 from aiohttp import web
 
 # #### Repo Configuration
-
-DEV_REPO = False  # Enable to use development repo
-
-if DEV_REPO:
-    REPO = 'https://git.bishopdynamics.com/james/superbird-debian'
-    REPO_VERSION = 'https://git.bishopdynamics.com/james/superbird-debian/-/raw/main/VERSION'
-else:
-    REPO = 'https://github.com/bishopdynamics/superbird-debian-kiosk'  # pyright: ignore[reportConstantRedefinition]
-    REPO_VERSION = 'https://raw.githubusercontent.com/bishopdynamics/superbird-debian-kiosk/refs/heads/main/VERSION'  # pyright: ignore[reportConstantRedefinition]
+# NOTE check_dev() will overwrite these if development repo is detected
+global_git_repository = 'https://github.com/bishopdynamics/superbird-debian-kiosk'  # pyright: ignore[reportConstantRedefinition]
+global_git_version_url = 'https://raw.githubusercontent.com/bishopdynamics/superbird-debian-kiosk/refs/heads/main/VERSION'  # pyright: ignore[reportConstantRedefinition]
 
 
 # #### Logging configuration
@@ -185,6 +179,29 @@ def truncate_file(file: str, content: str = ''):
         ufl.write(content)
 
 
+def check_dev():
+    """Check which repository is being used here, github or our dev repo"""
+    global global_git_repository
+    global global_git_version_url
+
+    if platform.system() == 'Darwin':
+        # HACK assume development if on macos, aka development environment
+        output = run_bash("cd ~/projects/superbird-debian; git remote -v|head -n 1|awk '{print $2}'")
+    else:
+        output = run_bash("cd /repo; git remote -v|head -n 1|awk '{print $2}'")
+
+    if 'git.bishopdynamics.com' in output:
+        # Development, our repo
+        log.info('Detected development repo')
+        global_git_repository = 'https://git.bishopdynamics.com/james/superbird-debian'
+        global_git_version_url = 'https://git.bishopdynamics.com/james/superbird-debian/-/raw/main/VERSION'
+    else:
+        # Production, github
+        log.info('Detected production repo')
+        global_git_repository = 'https://github.com/bishopdynamics/superbird-debian-kiosk'  # pyright: ignore[reportConstantRedefinition]
+        global_git_version_url = 'https://raw.githubusercontent.com/bishopdynamics/superbird-debian-kiosk/refs/heads/main/VERSION'  # pyright: ignore[reportConstantRedefinition]
+
+
 class APIEffector():
     """Implementation of actions for API"""
     safe_actions: list[str] = ['Check for Update']  # actions that are OK to do even on dev system
@@ -233,7 +250,7 @@ class APIEffector():
 
         while self.remote_version == Version('0.0.0'):
             try:
-                response = requests.get(REPO_VERSION, timeout=2.0)
+                response = requests.get(global_git_version_url, timeout=2.0)
                 content = response.content.decode()
                 self.remote_version = Version(content)
             except Exception as ex:
@@ -272,6 +289,7 @@ class APIEffector():
             log.info('Performing update, calling: /repo/upgrade.sh')
             log.info(f'  you can follow progress in {self.upgrade_log}')
             self.update_in_progress = True
+            self.update_complete = False
             script_content = f'#!/usr/bin/bash\n /repo/upgrade.sh > {self.upgrade_log} 2>&1\n'
             run_bash(script_content)
             self.check_version()
@@ -505,12 +523,15 @@ class Webserver():
             state = ''
             if action == 'Update to Latest' and not self.api.allow_update:
                 state = 'disabled'
+            if action in ['Restart Updater Service', 'Update to Latest', 'Reboot Host', 'Reboot Superbird', 'Check for Update'] and self.api.update_in_progress:
+                state = 'disabled'
+
             encoded_query = urlencode({'action': action})
             buttons_content += f'                <button onclick="window.location.href=\'/api?{encoded_query}\';" {state}>{action}</button>\n'
 
         script_js = self.get_js()
 
-        page_js = 'scroll_log_to_latest(); handle_refresh();'
+        page_js = 'scroll_log_to_latest(); set_device_name(); handle_refresh();'
         if self.api.update_in_progress:
             page_js += 'wait_for_update();'
 
@@ -523,7 +544,7 @@ class Webserver():
         <html>
             <body>
                 <div>
-                    <h1>Kiosk Host Maintenance Center</h1>
+                    <h1 id="page_title">Kiosk Host Maintenance Center</h1>
                 </div>
                 <div>
                 <button onclick="navigate_superbird();">Kiosk Superbird Config</button>
@@ -531,7 +552,7 @@ class Webserver():
                 <br>
 
                 <div>
-                    <label>Repo: {REPO}</label>
+                    <label>Repo: {global_git_repository}</label>
                 </div>
                 <div>
                     <label>Installed: v{self.api.local_version}</label>
@@ -596,6 +617,12 @@ class Webserver():
 
 
 if __name__ == '__main__':
+    try:
+        check_dev()
+    except Exception as ex:
+        log.exception(f'Unexpected exception encountered while checking for development repo: {ex}')
+        sys.exit(1)
+
     try:
         wsrv = Webserver()
     except Exception as ex:
