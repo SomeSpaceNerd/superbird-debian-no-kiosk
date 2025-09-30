@@ -28,7 +28,7 @@ from aiohttp import web
 
 # #### Repo Configuration
 
-DEV_REPO = True  # Enable to use development repo
+DEV_REPO = False  # Enable to use development repo
 
 if DEV_REPO:
     REPO = 'https://git.bishopdynamics.com/james/superbird-debian'
