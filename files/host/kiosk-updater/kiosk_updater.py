@@ -28,7 +28,7 @@ from aiohttp import web
 
 # #### Repo Configuration
 
-DEV_REPO = False  # Enable to use development repo
+DEV_REPO = True  # Enable to use development repo
 
 if DEV_REPO:
     REPO = 'https://git.bishopdynamics.com/james/superbird-debian'
@@ -228,6 +228,9 @@ class APIEffector():
         #   so we will retry forever until we have a value. Once we have any value other than 0.0.0, we will NOT retry on failure
         retry_after = 4  # seconds, how long to wait between retries
         content = '0.0.0'
+        if self.remote_version != Version('0.0.0'):
+            self.remote_version = Version('0.0.0')
+
         while self.remote_version == Version('0.0.0'):
             try:
                 response = requests.get(REPO_VERSION, timeout=2.0)
