@@ -199,7 +199,7 @@ def install_host():
     setup_hosts()
     setup_sshkey()
 
-    install_updater_service()
+    # install_updater_service()
 
 
 # #### Entrypoint

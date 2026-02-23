@@ -76,10 +76,6 @@ STAGE1_APT_PKGS: list[str] = [
 STAGE2_APT_PKGS: list[str] = [
     'python3-minimal',
     'python3-pip',
-    # the browser
-    'chromium',
-    # proxy, to fix remote chromium debug port access
-    'haproxy',
 ]
 
 KERNEL_VERSION = '4.9.113'  # this is the kernel that comes with superbird, we dont have any other kernel

@@ -56,7 +56,6 @@ def shutdown_services():
     announce_myself()
     services = [
         'backlight',
-        'kiosk',
         'vnc',
         'usbgadget',
         'websockify',
@@ -127,7 +126,6 @@ def install_services(bypass: bool):
     announce_myself()
     services = [
         'backlight',
-        'kiosk',
         'vnc',
         'websockify',
         'usbgadget',

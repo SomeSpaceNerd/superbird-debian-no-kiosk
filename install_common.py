@@ -456,7 +456,7 @@ def assert_superbird():
 def assert_hostdevice():
     """Ensure running directly on the host device (Raspberry Pi Zero 2 W)"""
     assert_linux()
-    assert_broadcom()
-    assert_rpizero2w()
-    assert_rasbperrypios()
-    log.info('This appears to be the host device, Raspberry Pi Zero 2 W')
+    #assert_broadcom()
+    #assert_rpizero2w()
+    #assert_rasbperrypios()
+    log.info('This appears to be the host device')
