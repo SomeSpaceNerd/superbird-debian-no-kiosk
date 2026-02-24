@@ -1,5 +1,0 @@
-# python packages to be installed (as root) using pip, on host raspberry pi
-
-aiohttp
-packaging
-requests

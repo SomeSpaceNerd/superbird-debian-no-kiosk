@@ -96,6 +96,7 @@ def _forward_port(src: int, dest: int):
     log.info(f'Forwarding port from host:{src} -> superbird:{dest}')
     scr_fwd = f"""
     iptables -t nat -A PREROUTING -p tcp -i wlan0 --dport "{src}" -j DNAT --to-destination "{USBNET_PREFIX}.2:{dest}"
+    iptables -t nat -A PREROUTING -p tcp -i eth0 --dport "{src}" -j DNAT --to-destination "{USBNET_PREFIX}.2:{dest}"
     iptables -A FORWARD -p tcp -d "{USBNET_PREFIX}.2" --dport "{dest}" -m state --state NEW,ESTABLISHED,RELATED -j ACCEPT
     """
     run_bash(scr_fwd)
@@ -188,7 +189,7 @@ def install_host():
     announce_myself()
 
     install_apt_packages(NEEDED_APT_PKGS)
-    install_pip_packages('./files/host/kiosk-updater/requirements.txt')
+    #install_pip_packages('./files/host/kiosk-updater/requirements.txt')
 
     fix_enumeration()
     fix_ifnames()

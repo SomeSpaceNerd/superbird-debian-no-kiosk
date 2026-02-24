@@ -488,7 +488,7 @@ def build_image(orient: str, ver_name: str):
     setup_ssh_key()
 
     # install the kiosk files and services
-    install_kiosk()
+    #install_kiosk()
 
     # done with data
     unmount_data()
